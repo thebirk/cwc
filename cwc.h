@@ -21,18 +21,9 @@
 #ifndef _CWC_H
 #define _CWC_H
 
-// Config start
-
-// If this is 1, then include stdlib and add new() and delete() macro
-#define MALLOC_ALTERNATIVE 1
-
-// Config end
-
-#if MALLOC_ALTERNATIVE == 1
 #include <stdlib.h>
 #define new(o) malloc(sizeof(o))
 #define delete(o) free(o)
-#endif
 
 #ifdef __cplusplus
 #define begin_class(cls) struct cls {
