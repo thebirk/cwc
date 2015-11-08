@@ -21,6 +21,7 @@ decl_method_impl(MSG, void, Set, char*)
 *MSG.c*
 ```c
 #include "MSG.h"
+#include <stdio.h>
 
 begin_constructor(MSG, char *msg)
 	self->msg = msg;
