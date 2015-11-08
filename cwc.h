@@ -25,7 +25,6 @@
 
 // If this is 1, then include stdlib and add new() and delete() macro
 #define MALLOC_ALTERNATIVE 1
-//
 
 // Config end
 
@@ -35,17 +34,22 @@
 #define delete(o) free(o)
 #endif
 
-#define begin_class(n) typedef struct n n; struct n {
+#ifdef __cplusplus
+#define begin_class(cls) struct cls {
 #define end_class };
+#else 
+#define begin_class(cls) typedef struct cls cls; struct cls {
+#define end_class };
+#endif
 
-#define decl_method(class, ret, name, ...) ret (*name)(class* self, ## __VA_ARGS__);
-#define decl_method_impl(class, ret, name, ...) ret class ## _ ## name(class *self, ## __VA_ARGS__);
-#define begin_method(class, ret, name, ...) ret class ## _ ## name(class *self, ## __VA_ARGS__) {
+#define decl_method(cls, ret, name, ...) ret (*name)(cls *self, ## __VA_ARGS__);
+#define decl_method_impl(cls, ret, name, ...) ret cls ## _ ## name(cls *self, ## __VA_ARGS__);
+#define begin_method(cls, ret, name, ...) ret cls ## _ ## name(cls *self, ## __VA_ARGS__) {
 #define end_method }
 
-#define decl_constructor(class, ...) class* new ## class (__VA_ARGS__);
-#define begin_constructor(class, ...) class* new ## class (__VA_ARGS__) { class* self = new(class);
-#define add_method(class, name) self->name = class ## _ ## name;
+#define decl_constructor(cls, ...) cls* new ## cls (__VA_ARGS__);
+#define begin_constructor(cls, ...) cls* new ## cls (__VA_ARGS__) { cls* self = (cls*) new(cls);
+#define add_method(cls, name) self->name = cls ## _ ## name;
 #define end_constructor return self; }
 
 #endif
