@@ -5,7 +5,7 @@ defclass(Player)
     int x;
     int y;
 
-    method(Player, void, Update, Window*);
+    method(Player, void, Update, Window*)
     method(Player, void, Render, Window*)
 endclass
 
