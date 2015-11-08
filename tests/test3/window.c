@@ -8,6 +8,10 @@ defconstructor(Window, int width, int height, char *title)
     self->renderer = SDL_CreateRenderer(self->window, -1, 0);
 
     self->closeRequested = 0;
+    self->up = 0;
+    self->down = 0;
+    self->left = 0;
+    self->right = 0;
 
     add_method(Window, FillRect)
     add_method(Window, SetColor)
@@ -36,6 +40,38 @@ defmethod(Window, void, Update)
         switch(e.type) {
             case SDL_QUIT:
                 self->closeRequested = 1;
+                break;
+            case SDL_KEYUP:
+                switch(e.key.keysym.sym) {
+                    case SDLK_UP:
+                        self->up = 0;
+                        break;
+                    case SDLK_DOWN:
+                        self->down = 0;
+                        break;
+                    case SDLK_LEFT:
+                        self->left = 0;
+                        break;
+                    case SDLK_RIGHT:
+                        self->right = 0;
+                        break;
+                }
+                break;
+            case SDL_KEYDOWN:
+                switch(e.key.keysym.sym) {
+                    case SDLK_UP:
+                        self->up = 1;
+                        break;
+                    case SDLK_DOWN:
+                        self->down = 1;
+                        break;
+                    case SDLK_LEFT:
+                        self->left = 1;
+                        break;
+                    case SDLK_RIGHT:
+                        self->right = 1;
+                        break;
+                }
                 break;
         }
     }
