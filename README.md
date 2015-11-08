@@ -16,6 +16,8 @@ defclass(MSG)
 	method(MSG, void, Set, char*)
 endclass
 
+decl_constructor(MSG, char *msg)
+
 #endif /* _MSG_H */
 ```
 *MSG.c*
@@ -23,7 +25,6 @@ endclass
 #include "MSG.h"
 #include <stdio.h>
 
-decl_constructor(MSG, char *msg)
 decl_method_impl(MSG, void, Send)
 decl_method_impl(MSG, void, Set, char*)
 
