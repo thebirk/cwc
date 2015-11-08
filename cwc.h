@@ -26,21 +26,21 @@
 #define delete(o) free(o)
 
 #ifdef __cplusplus
-#define begin_class(cls) struct cls {
-#define end_class };
-#else 
-#define begin_class(cls) typedef struct cls cls; struct cls {
-#define end_class };
+#define defclass(cls) struct cls {
+#define endclass };
+#else
+#define defclass(cls) typedef struct cls cls; struct cls {
+#define endclass };
 #endif
 
-#define decl_method(cls, ret, name, ...) ret (*name)(cls *self, ## __VA_ARGS__);
-#define decl_method_impl(cls, ret, name, ...) ret cls ## _ ## name(cls *self, ## __VA_ARGS__);
-#define begin_method(cls, ret, name, ...) ret cls ## _ ## name(cls *self, ## __VA_ARGS__) {
-#define end_method }
+#define method(cls, ret, name, ...) ret (*name)(cls *self, ## __VA_ARGS__);
+#define decl_method(cls, ret, name, ...) ret cls ## _ ## name(cls *self, ## __VA_ARGS__);
+#define defmethod(cls, ret, name, ...) ret cls ## _ ## name(cls *self, ## __VA_ARGS__) {
+#define endmethod }
 
 #define decl_constructor(cls, ...) cls* new ## cls (__VA_ARGS__);
-#define begin_constructor(cls, ...) cls* new ## cls (__VA_ARGS__) { cls* self = (cls*) new(cls);
+#define defconstructor(cls, ...) cls* new ## cls (__VA_ARGS__) { cls* self = (cls*) new(cls);
 #define add_method(cls, name) self->name = cls ## _ ## name;
-#define end_constructor return self; }
+#define endconstructor return self; }
 
 #endif

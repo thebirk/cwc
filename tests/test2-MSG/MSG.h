@@ -1,12 +1,12 @@
 #include "../../cwc.h"
 
-begin_class(MSG)
+defclass(MSG)
 	char *msg;
-	
-	decl_method(MSG, void, Send)
-	decl_method(MSG, void, Set, char*)
-end_class
+
+	method(MSG, void, Send)
+	method(MSG, void, Set, char*)
+endclass
 
 decl_constructor(MSG, char *msg)
-decl_method_impl(MSG, void, Send)
-decl_method_impl(MSG, void, Set, char*)
+decl_method(MSG, void, Send)
+decl_method(MSG, void, Set, char*)
