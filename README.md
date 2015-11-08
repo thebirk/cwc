@@ -19,7 +19,7 @@ decl_method_impl(MSG, void, Send)
 decl_method_impl(MSG, void, Set, char*)
 ```
 *MSG.c*
-```
+```c
 #include "MSG.h"
 
 begin_constructor(MSG, char *msg)
@@ -39,7 +39,7 @@ end_method
 ```
 
 *main.c*
-```
+```c
 #include "MSG.h"
 
 void main() {
