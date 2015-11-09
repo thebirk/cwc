@@ -1,6 +1,7 @@
 #ifndef _WINDOW_H
 #define _WINDOW_H
 #include "../../cwc.h"
+#include "input.h"
 #include <SDL2/SDL.h>
 
 defclass(Window)
@@ -11,10 +12,7 @@ defclass(Window)
 	int width;
 	int height;
 
-	int up;
-	int down;
-	int left;
-	int right;
+	Input *input;
 
 	method(Window, void, FillRect, int x, int y, int w, int h)
 	method(Window, void, SetColor, int r, int g, int b, int a)

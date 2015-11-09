@@ -5,7 +5,7 @@
 int main(int argc, char **argv) {
 
 	Window *window = newWindow(800, 600, "Hello, world!");
-	Player *player = newPlayer();
+	Player *player = newPlayer(window->input);
 
 	while(!window->isCloseRequested(window)) {
 		window->SetColor(window, 0, 0, 0, 0);

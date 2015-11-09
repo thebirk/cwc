@@ -8,10 +8,8 @@ defconstructor(Window, int width, int height, char *title)
     self->renderer = SDL_CreateRenderer(self->window, -1, 0);
 
     self->closeRequested = 0;
-    self->up = 0;
-    self->down = 0;
-    self->left = 0;
-    self->right = 0;
+
+    self->input = newInput();
 
     add_method(Window, FillRect)
     add_method(Window, SetColor)
@@ -44,32 +42,32 @@ defmethod(Window, void, Update)
             case SDL_KEYUP:
                 switch(e.key.keysym.sym) {
                     case SDLK_UP:
-                        self->up = 0;
+                        self->input->SetKey(self->input, UP, false);
                         break;
                     case SDLK_DOWN:
-                        self->down = 0;
+                        self->input->SetKey(self->input, DOWN, false);
                         break;
                     case SDLK_LEFT:
-                        self->left = 0;
+                        self->input->SetKey(self->input, LEFT, false);
                         break;
                     case SDLK_RIGHT:
-                        self->right = 0;
+                        self->input->SetKey(self->input, RIGHT, false);
                         break;
                 }
                 break;
             case SDL_KEYDOWN:
                 switch(e.key.keysym.sym) {
                     case SDLK_UP:
-                        self->up = 1;
+                        self->input->SetKey(self->input, UP, true);
                         break;
                     case SDLK_DOWN:
-                        self->down = 1;
+                        self->input->SetKey(self->input, DOWN, true);
                         break;
                     case SDLK_LEFT:
-                        self->left = 1;
+                        self->input->SetKey(self->input, LEFT, true);
                         break;
                     case SDLK_RIGHT:
-                        self->right = 1;
+                        self->input->SetKey(self->input, RIGHT, true);
                         break;
                 }
                 break;

@@ -3,24 +3,26 @@
 decl_method(Player, void, Render, Window*)
 decl_method(Player, void, Update, Window*)
 
-defconstructor(Player)
+defconstructor(Player, Input *input)
     self->x = 50;
     self->y = 50;
+
+    self->input = input;
 
     add_method(Player, Render)
     add_method(Player, Update)
 endconstructor
 
 defmethod(Player, void, Update, Window *window)
-    if(window->up) {
+    if(self->input->GetKey(self->input, UP)) {
         self->y--;
-    }else if(window->down){
+    }else if(self->input->GetKey(self->input, DOWN)){
         self->y++;
     }
 
-    if(window->left) {
+    if(self->input->GetKey(self->input, LEFT)) {
         self->x--;
-    }else if(window->right) {
+    }else if(self->input->GetKey(self->input, RIGHT)) {
         self->x++;
     }
 endmethod
